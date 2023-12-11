@@ -22,7 +22,9 @@ class VacancyReplyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string']
+            'cv_id' => ['required', 'integer'],
+            'vacancy_id' => ['required', 'integer'],
+            'covering_letter' => ['required', 'string'],
         ];
     }
 }

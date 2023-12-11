@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\EmploymentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class VacancyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'salary' => $this->faker->numberBetween(100000,500000),
+            'category_id' => Category::get()->random()->id,
+            'employment_type_id' => EmploymentType::get()->random()->id,
+            'responsibility' => $this->faker->words(),
+            'requirements' => $this->faker->words(),
         ];
     }
 }

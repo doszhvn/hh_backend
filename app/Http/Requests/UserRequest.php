@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CVRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class CVRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cv_url' => ['required', 'string'],
+            'name' => ['required', 'string']
         ];
     }
 }
