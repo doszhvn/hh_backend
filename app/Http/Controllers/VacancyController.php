@@ -10,16 +10,83 @@ use Illuminate\Http\Request;
 class VacancyController extends Controller
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
     public function index()
     {
-        return Vacancy::all();
+        $vacancies = Vacancy::leftJoin('categories', 'vacancies.category_id', '=', 'categories.id')
+            ->leftJoin('employment_types', 'vacancies.employment_type_id', '=', 'employment_types.id')
+            ->select(
+                'vacancies.id',
+                'vacancies.name',
+                'vacancies.salary',
+                'vacancies.category_id',
+                'categories.name AS category_name',
+                'vacancies.employment_type_id',
+                'employment_types.name AS employment_type_name',
+                'vacancies.responsibility',
+                'vacancies.requirements'
+            )
+            ->get();
+
+        $formattedVacancies  = [];
+        foreach ($vacancies as $vacancy) {
+            $formattedVacancies[] = [
+                'id' => $vacancy->id,
+                'name' => $vacancy->name,
+                'salary' => $vacancy->salary,
+                'category' => [
+                    'category_id' => $vacancy->category_id,
+                    'category_name' => $vacancy->category_name,
+                ],
+                'employment_type' => [
+                    'employment_type_id' => $vacancy->employment_type_id,
+                    'employment_type_name' => $vacancy->employment_type_name,
+                ],
+                'responsibility' =>$vacancy->responsibility,
+                'requirements' =>$vacancy->requirements,
+
+            ];
+        }
+
+        return $formattedVacancies;
     }
 
     public function show(Vacancy $dataId)
     {
-        return $dataId;
+        $vacancy = Vacancy::leftJoin('categories', 'vacancies.category_id', '=', 'categories.id')
+            ->leftJoin('employment_types', 'vacancies.employment_type_id', '=', 'employment_types.id')
+            ->where('vacancies.id', '=', $dataId['id'])
+            ->select(
+                'vacancies.id',
+                'vacancies.name',
+                'vacancies.salary',
+                'vacancies.category_id',
+                'categories.name AS category_name',
+                'vacancies.employment_type_id',
+                'employment_types.name AS employment_type_name',
+                'vacancies.responsibility',
+                'vacancies.requirements'
+            )
+            ->first();
+            $formattedVacancy = [
+                'id' => $vacancy->id,
+                'name' => $vacancy->name,
+                'salary' => $vacancy->salary,
+                'category' => [
+                    'category_id' => $vacancy->category_id,
+                    'category_name' => $vacancy->category_name,
+                ],
+                'employment_type' => [
+                    'employment_type_id' => $vacancy->employment_type_id,
+                    'employment_type_name' => $vacancy->employment_type_name,
+                ],
+                'responsibility' =>$vacancy->responsibility,
+                'requirements' =>$vacancy->requirements,
+
+            ];
+
+        return $formattedVacancy;
     }
 
     /**

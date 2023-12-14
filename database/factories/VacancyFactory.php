@@ -23,8 +23,8 @@ class VacancyFactory extends Factory
             'salary' => $this->faker->numberBetween(100000,500000),
             'category_id' => Category::get()->random()->id,
             'employment_type_id' => EmploymentType::get()->random()->id,
-            'responsibility' => $this->faker->words(),
-            'requirements' => $this->faker->words(),
+            'responsibility' => $this->faker->text(),
+            'requirements' => $this->faker->text(),
         ];
     }
 }

@@ -21,7 +21,7 @@ class VacancyReplyFactory extends Factory
         return [
             'cv_id' => CV::get()->random()->id,
             'vacancy_id' => Vacancy::get()->random()->id,
-            'covering_letter' => $this->faker->words(),
+            'covering_letter' => $this->faker->text(),
         ];
     }
 }

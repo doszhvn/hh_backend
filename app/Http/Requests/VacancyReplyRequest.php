@@ -24,7 +24,7 @@ class VacancyReplyRequest extends FormRequest
         return [
             'cv_id' => ['required', 'integer'],
             'vacancy_id' => ['required', 'integer'],
-            'covering_letter' => ['required', 'string'],
+            'covering_letter' => ['string'],
         ];
     }
 }

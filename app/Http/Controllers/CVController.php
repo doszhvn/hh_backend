@@ -14,9 +14,8 @@ class CVController extends Controller
      */
     public function index()
     {
-        return CV::all();
+        return CV::where('user_id', auth()->user()->id)->get();
     }
-
     public function show(CV $dataId)
     {
         return $dataId;

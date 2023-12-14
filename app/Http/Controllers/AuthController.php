@@ -81,18 +81,4 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
-
-
-    public function register(UserRequest $request)
-    {
-        $data = $request->validated();
-        $data['password']= Hash::make($data['password']);
-        $data['role'] = 'user';
-        $user = User::create($data);
-        if($user){
-            return response()->json([
-                'message' => 'User registered successfully',
-            ], 200);
-        }
-    }
 }
