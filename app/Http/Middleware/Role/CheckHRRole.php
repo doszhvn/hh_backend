@@ -19,6 +19,6 @@ class CheckHRRole
         if (auth()->user()->role == 'hr' || auth()->user()->role == 'admin') {
             return $next($request);
         }
-        return response()->json(['error' => 'You must be a user.'], 403);
+        return response()->json(['error' => 'You must be an HR manager.'], 403);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\VacancyReplyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,36 +31,37 @@ Route::prefix('cv')->group(function () {
     Route::delete('/{dataId}', [CVController::class, 'delete'])->middleware('adminRole');
 });
 
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::get('/{dataId}', [CategoryController::class, 'show']);
+    Route::post('/', [CategoryController::class, 'store'])->middleware('moderatorRole');
+    Route::put('/{dataId}', [CategoryController::class, 'update'])->middleware('moderatorRole');
+    Route::delete('/{dataId}', [CategoryController::class, 'delete'])->middleware('adminRole');
+});
+
+Route::prefix('employment-type')->group(function () {
+    Route::get('/', [EmploymentTypeController::class, 'index']);
+    Route::get('/{dataId}', [EmploymentTypeController::class, 'show']);
+    Route::post('/', [EmploymentTypeController::class, 'store'])->middleware('moderatorRole');
+    Route::put('/{dataId}', [EmploymentTypeController::class, 'update'])->middleware('moderatorRole');
+    Route::delete('/{dataId}', [EmploymentTypeController::class, 'delete'])->middleware('adminRole');
+});
+
+Route::prefix('vacancy-reply')->group(function () {
+    Route::get('/', [VacancyReplyController::class, 'index']);
+    Route::get('/by-vacancy-id', [VacancyReplyController::class, 'replyByVacancyId']);
+    Route::get('/{dataId}', [VacancyReplyController::class, 'show']);
+    Route::post('/', [VacancyReplyController::class, 'store'])->middleware('userRole');
+    Route::put('/{dataId}', [VacancyReplyController::class, 'update'])->middleware('userRole');
+    Route::delete('/{dataId}', [VacancyReplyController::class, 'delete'])->middleware('adminRole');
+});
+
 Route::prefix('vacancy')->group(function () {
     Route::get('/', [VacancyController::class, 'index']);
     Route::get('/{dataId}', [VacancyController::class, 'show']);
     Route::post('/', [VacancyController::class, 'store'])->middleware('hrRole');
     Route::put('/{dataId}', [VacancyController::class, 'update'])->middleware('hrRole');
     Route::delete('/{dataId}', [VacancyController::class, 'delete'])->middleware('adminRole');
-
-    Route::prefix('category')->group(function () {
-        Route::get('/', [CategoryController::class, 'index']);
-        Route::get('/{dataId}', [CategoryController::class, 'show']);
-        Route::post('/', [CategoryController::class, 'store'])->middleware('moderatorRole');
-        Route::put('/{dataId}', [CategoryController::class, 'update'])->middleware('moderatorRole');
-        Route::delete('/{dataId}', [CategoryController::class, 'delete'])->middleware('adminRole');
-    });
-
-    Route::prefix('employment-type')->group(function () {
-        Route::get('/', [EmploymentTypeController::class, 'index']);
-        Route::get('/{dataId}', [EmploymentTypeController::class, 'show']);
-        Route::post('/', [EmploymentTypeController::class, 'store'])->middleware('moderatorRole');
-        Route::put('/{dataId}', [EmploymentTypeController::class, 'update'])->middleware('moderatorRole');
-        Route::delete('/{dataId}', [EmploymentTypeController::class, 'delete'])->middleware('adminRole');
-    });
-
-    Route::prefix('reply')->group(function () {
-        Route::get('/', [VacancyController::class, 'index']);
-        Route::get('/{dataId}', [VacancyController::class, 'show']);
-        Route::post('/', [VacancyController::class, 'store'])->middleware('hrRole');
-        Route::put('/{dataId}', [VacancyController::class, 'update'])->middleware('hrRole');
-        Route::delete('/{dataId}', [VacancyController::class, 'delete'])->middleware('adminRole');
-    });
 });
 
 

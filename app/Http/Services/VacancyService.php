@@ -2,13 +2,13 @@
 
 namespace App\Http\Services;
 
-use App\Models\CV;
+use App\Models\Vacancy;
 
 class VacancyService
 {
     public function store($data)
     {
-        if (CV::create($data)) {
+        if (Vacancy::create($data)) {
             return ["message" => 'data created successful'];
         } else {
             return response()->json(["error" => 'data creating failed'], 500);
