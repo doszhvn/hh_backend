@@ -16,6 +16,8 @@ class VacancyController extends Controller
     {
         $vacancies = Vacancy::leftJoin('categories', 'vacancies.category_id', '=', 'categories.id')
             ->leftJoin('employment_types', 'vacancies.employment_type_id', '=', 'employment_types.id')
+            ->leftJoin('vacancy_replies', 'vacancies.id', '=', 'vacancy_replies.vacancy_id')
+            ->leftJoin('c_v_s', 'c_v_s.id', '=', 'vacancy_replies.cv_id')
             ->select(
                 'vacancies.id',
                 'vacancies.name',
@@ -27,7 +29,8 @@ class VacancyController extends Controller
                 'vacancies.responsibility',
                 'vacancies.requirements'
             )
-            ->get();
+            ->where('cv_s.user_id', auth()->user()->id)
+        ->get();
 
         $formattedVacancies  = [];
         foreach ($vacancies as $vacancy) {
@@ -45,7 +48,7 @@ class VacancyController extends Controller
                 ],
                 'responsibility' =>$vacancy->responsibility,
                 'requirements' =>$vacancy->requirements,
-
+                'reply_status' => !is_null($vacancy->cv_id) ? 1 : 0,
             ];
         }
 
