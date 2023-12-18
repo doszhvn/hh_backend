@@ -48,6 +48,6 @@ class DatabaseSeeder extends Seeder
         ]);
         Vacancy::factory(10)->create();
         CV::factory(10)->create();
-        VacancyReply::factory(10)->create();
+//        VacancyReply::factory(10)->create();
     }
 }

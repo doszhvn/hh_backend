@@ -30,9 +30,9 @@ class VacancyController extends Controller
                 'vacancies.requirements',
                 'c_v_s.user_id AS user_id'
             )
-            
+            ->distinct()
         ->get();
-
+//return $vacancies;
         $formattedVacancies  = [];
         foreach ($vacancies as $vacancy) {
             $formattedVacancies[] = [
