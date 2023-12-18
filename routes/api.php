@@ -34,16 +34,16 @@ Route::prefix('cv')->group(function () {
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('/{dataId}', [CategoryController::class, 'show']);
-    Route::post('/', [CategoryController::class, 'store'])->middleware('moderatorRole');
-    Route::put('/{dataId}', [CategoryController::class, 'update'])->middleware('moderatorRole');
+    Route::post('/', [CategoryController::class, 'store'])->middleware('hrRole');
+    Route::put('/{dataId}', [CategoryController::class, 'update'])->middleware('hrRole');
     Route::delete('/{dataId}', [CategoryController::class, 'delete'])->middleware('adminRole');
 });
 
 Route::prefix('employment-type')->group(function () {
     Route::get('/', [EmploymentTypeController::class, 'index']);
     Route::get('/{dataId}', [EmploymentTypeController::class, 'show']);
-    Route::post('/', [EmploymentTypeController::class, 'store'])->middleware('moderatorRole');
-    Route::put('/{dataId}', [EmploymentTypeController::class, 'update'])->middleware('moderatorRole');
+    Route::post('/', [EmploymentTypeController::class, 'store'])->middleware('hrRole');
+    Route::put('/{dataId}', [EmploymentTypeController::class, 'update'])->middleware('hrRole');
     Route::delete('/{dataId}', [EmploymentTypeController::class, 'delete'])->middleware('adminRole');
 });
 
