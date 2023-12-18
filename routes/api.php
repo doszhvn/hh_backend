@@ -28,7 +28,7 @@ Route::prefix('cv')->group(function () {
     Route::get('/{dataId}', [CVController::class, 'show']);
     Route::post('/', [CVController::class, 'store'])->middleware('userRole');
     Route::put('/{dataId}', [CVController::class, 'update'])->middleware('userRole');
-    Route::delete('/{dataId}', [CVController::class, 'delete'])->middleware('adminRole');
+    Route::delete('/{dataId}', [CVController::class, 'delete'])->middleware('userRole');
 });
 
 Route::prefix('category')->group(function () {
