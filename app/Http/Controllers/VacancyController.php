@@ -29,7 +29,7 @@ class VacancyController extends Controller
                 'vacancies.responsibility',
                 'vacancies.requirements'
             )
-            ->where('cv_s.user_id', auth()->user()->id)
+            ->where('c_v_s.user_id', auth()->user()->id)
         ->get();
 
         $formattedVacancies  = [];
