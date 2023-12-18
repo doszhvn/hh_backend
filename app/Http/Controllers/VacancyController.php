@@ -27,9 +27,10 @@ class VacancyController extends Controller
                 'vacancies.employment_type_id',
                 'employment_types.name AS employment_type_name',
                 'vacancies.responsibility',
-                'vacancies.requirements'
+                'vacancies.requirements',
+                'c_v_s.user_id AS user_id'
             )
-            ->where('c_v_s.user_id', auth()->user()->id)
+            
         ->get();
 
         $formattedVacancies  = [];
@@ -48,7 +49,7 @@ class VacancyController extends Controller
                 ],
                 'responsibility' =>$vacancy->responsibility,
                 'requirements' =>$vacancy->requirements,
-                'reply_status' => !is_null($vacancy->cv_id) ? 1 : 0,
+                'reply_status' => $vacancy->user_id == auth()->user()->id ? 1 : 0,
             ];
         }
 
