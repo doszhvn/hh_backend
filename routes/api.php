@@ -57,8 +57,8 @@ Route::prefix('vacancy-reply')->group(function () {
 });
 
 Route::prefix('vacancy')->group(function () {
-    Route::get('/', [VacancyController::class, 'index'])->middleware('userRole');
-    Route::get('/{dataId}', [VacancyController::class, 'show'])->middleware('userRole');
+    Route::get('/', [VacancyController::class, 'index']);
+    Route::get('/{dataId}', [VacancyController::class, 'show']);
     Route::post('/', [VacancyController::class, 'store'])->middleware('hrRole');
     Route::put('/{dataId}', [VacancyController::class, 'update'])->middleware('hrRole');
     Route::delete('/{dataId}', [VacancyController::class, 'delete'])->middleware('adminRole');
